@@ -96,11 +96,30 @@ extension LottoResultsViewController {
 //MARK: - Configure UI
 extension LottoResultsViewController {
     func configureLayout() {
-        
+        lottoNumberStackView.snp.makeConstraints {
+            $0.centerX.equalTo(view)
+            $0.centerY.equalTo(view) //임시
+        }
+        lottoNumbers.forEach {
+            $0.snp.makeConstraints { $0.size.equalTo(42) }
+        }
     }
     
     func configureUI() {
         view.backgroundColor = .white
+
+        lottoNumbers.forEach {
+            $0.text = "21" //임시 번호
+            $0.backgroundColor = .red //임시 색상
+            $0.textColor = .white
+            $0.textAlignment = .center
+            $0.font = .systemFont(ofSize: 17, weight: .semibold)
+            $0.layer.cornerRadius = 21
+            $0.layer.masksToBounds = true
+        }
+        plusLabel.textColor = .black
+        plusLabel.text = "+"
+        plusLabel.backgroundColor = .clear
     }
 }
 

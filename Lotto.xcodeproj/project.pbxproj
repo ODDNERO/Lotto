@@ -14,6 +14,8 @@
 		CE7157842C12341F00C8ECC0 /* LottoResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7157832C12341F00C8ECC0 /* LottoResultsViewController.swift */; };
 		CE7157872C12422600C8ECC0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE7157862C12422600C8ECC0 /* SnapKit */; };
 		CE71578A2C12426000C8ECC0 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE7157892C12426000C8ECC0 /* Alamofire */; };
+		CE71578C2C124CEB00C8ECC0 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71578B2C124CEB00C8ECC0 /* APIKey.swift */; };
+		CE71578E2C12509800C8ECC0 /* LottoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71578D2C12509800C8ECC0 /* LottoDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		CE71577B2C12026800C8ECC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE71577D2C12026800C8ECC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE7157832C12341F00C8ECC0 /* LottoResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoResultsViewController.swift; sourceTree = "<group>"; };
+		CE71578B2C124CEB00C8ECC0 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		CE71578D2C12509800C8ECC0 /* LottoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,9 +65,11 @@
 				CE71576F2C12026400C8ECC0 /* AppDelegate.swift */,
 				CE7157712C12026400C8ECC0 /* SceneDelegate.swift */,
 				CE7157832C12341F00C8ECC0 /* LottoResultsViewController.swift */,
+				CE71578D2C12509800C8ECC0 /* LottoDTO.swift */,
 				CE7157782C12026700C8ECC0 /* Assets.xcassets */,
 				CE71577A2C12026800C8ECC0 /* LaunchScreen.storyboard */,
 				CE71577D2C12026800C8ECC0 /* Info.plist */,
+				CE71578B2C124CEB00C8ECC0 /* APIKey.swift */,
 			);
 			path = Lotto;
 			sourceTree = "<group>";
@@ -147,7 +153,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE7157702C12026400C8ECC0 /* AppDelegate.swift in Sources */,
+				CE71578E2C12509800C8ECC0 /* LottoDTO.swift in Sources */,
 				CE7157842C12341F00C8ECC0 /* LottoResultsViewController.swift in Sources */,
+				CE71578C2C124CEB00C8ECC0 /* APIKey.swift in Sources */,
 				CE7157722C12026400C8ECC0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
