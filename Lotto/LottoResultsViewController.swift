@@ -77,7 +77,15 @@ class LottoResultsViewController: UIViewController {
 //MARK: - Configure
 extension LottoResultsViewController {
     func configureHierarchy() {
+        [lottoRoundLabel, resultLabel].forEach { resultStackView.addArrangedSubview($0) }
         
+        lottoNumbers.forEach { lottoNumberStackView.addArrangedSubview($0) }
+        
+        [firstPrizeMoneyTitleLabel, firstPrizeMoneyLabel].forEach { prizeMoneyStackView.addArrangedSubview($0) }
+        
+        [firstWinnerCountTitleLabel, firstWinnerCountLabel].forEach { winnerCountStackView.addArrangedSubview($0) }
+        
+        [roundTextField, roundPickerView, lottoDateLabel, resultStackView, lottoNumberStackView, prizeMoneyStackView, winnerCountStackView].forEach { view.addSubview($0) }
     }
     
     func configureData() {
