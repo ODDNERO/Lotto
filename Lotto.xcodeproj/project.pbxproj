@@ -11,6 +11,7 @@
 		CE7157722C12026400C8ECC0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7157712C12026400C8ECC0 /* SceneDelegate.swift */; };
 		CE7157792C12026800C8ECC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE7157782C12026700C8ECC0 /* Assets.xcassets */; };
 		CE71577C2C12026800C8ECC0 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CE71577B2C12026800C8ECC0 /* Base */; };
+		CE7157842C12341F00C8ECC0 /* LottoResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7157832C12341F00C8ECC0 /* LottoResultsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		CE7157782C12026700C8ECC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE71577B2C12026800C8ECC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE71577D2C12026800C8ECC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE7157832C12341F00C8ECC0 /* LottoResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoResultsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				CE71576F2C12026400C8ECC0 /* AppDelegate.swift */,
 				CE7157712C12026400C8ECC0 /* SceneDelegate.swift */,
+				CE7157832C12341F00C8ECC0 /* LottoResultsViewController.swift */,
 				CE7157782C12026700C8ECC0 /* Assets.xcassets */,
 				CE71577A2C12026800C8ECC0 /* LaunchScreen.storyboard */,
 				CE71577D2C12026800C8ECC0 /* Info.plist */,
@@ -132,6 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE7157702C12026400C8ECC0 /* AppDelegate.swift in Sources */,
+				CE7157842C12341F00C8ECC0 /* LottoResultsViewController.swift in Sources */,
 				CE7157722C12026400C8ECC0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
