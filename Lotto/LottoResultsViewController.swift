@@ -61,16 +61,24 @@ class LottoResultsViewController: UIViewController {
         return stackView
     }()
     
+    var latestRound = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureHierarchy()
-        configureData()
-        configureLayout()
-        configureUI()
-        
-        settingNavigation()
+        getLatestRound(startRound: 1115) {
+            print("completionRound:", $0)
+            
+            self.latestRound = $0
+            print("latestRound:", self.latestRound)
+            
+            self.configureHierarchy()
+            self.configureData()
+            self.configureLayout()
+            self.configureUI()
+            
+            self.settingNavigation()
+        }
     }
 }
 
@@ -90,6 +98,24 @@ extension LottoResultsViewController {
     
     func configureData() {
         
+    }
+    
+    //MARK: - Network
+    func getLatestRound(startRound round: Int, completion: @escaping (Int) -> Void) {
+        print("round:", round)
+        
+        let url = APIURL.lottoURL + String(round)
+        
+        AF.request(url).responseDecodable(of: LottoDTO.self) { dataResponse in
+            switch dataResponse.result {
+            case .success(_):
+                print("--- success ---")
+                self.getLatestRound(startRound: round + 1, completion: completion)
+            case .failure(_):
+                print("--- failure ---")
+                completion(round - 1)
+            }
+        }
     }
 }
 
