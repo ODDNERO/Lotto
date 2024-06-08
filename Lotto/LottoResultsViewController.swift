@@ -121,6 +121,27 @@ extension LottoResultsViewController {
         plusLabel.text = "+"
         plusLabel.backgroundColor = .clear
     }
+    
+    func setLottoNumberColor(_ lottoNum: Int) -> UIColor {
+        switch lottoNum {
+        case 1...10:
+            return .no1To10
+        case 11...20:
+            return .no11To20
+        case 21...30:
+            return .no21To30
+        case 31...40:
+            return .no31To40
+        case 41...45:
+            return .no41To45
+        default:
+            return .clear
+        }
+    }
+    
+    func assignLottoNumbersToLabels() {
+        
+    }
 }
 
 //MARK: - Switching View
