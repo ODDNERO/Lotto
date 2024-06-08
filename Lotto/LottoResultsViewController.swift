@@ -137,6 +137,18 @@ extension LottoResultsViewController {
             }
         }
     }
+
+    func setLottoResult(_ numbers: [Int], _ date: String, _ round: Int, _ money: Int, _ winner: Int) {
+        for (index, label) in lottoNumberLabels.enumerated() {
+            label.text = "\(numbers[index])"
+            label.backgroundColor = setLottoNumberColor(numbers[index])
+        }
+        plusLabel.text = "+"
+        lottoDateLabel.text = "\(date) 추첨"
+        lottoRoundLabel.text = "\(round)회"
+        firstPrizeMoneyLabel.text = "\(money)원"
+        firstWinnerCountLabel.text = "\(winner)명"
+    }
 }
 
 extension LottoResultsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
