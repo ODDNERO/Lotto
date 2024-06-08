@@ -62,6 +62,7 @@ class LottoResultsViewController: UIViewController {
     }()
     
     var latestRound = 0
+    var roundList: [Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +72,10 @@ class LottoResultsViewController: UIViewController {
             
             self.latestRound = $0
             print("latestRound:", self.latestRound)
+            
+            for round in (1...$0).reversed() {
+                self.roundList.append(round)
+            }
             
             self.configureHierarchy()
             self.configureData()
@@ -97,7 +102,8 @@ extension LottoResultsViewController {
     }
     
     func configureData() {
-        
+        roundPickerView.delegate = self
+        roundPickerView.dataSource = self
     }
     
     //MARK: - Network
@@ -116,6 +122,24 @@ extension LottoResultsViewController {
                 completion(round - 1)
             }
         }
+    }
+}
+
+extension LottoResultsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return latestRound
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return String(roundList[row])
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        roundTextField.text = String(roundList[row])
     }
 }
 
