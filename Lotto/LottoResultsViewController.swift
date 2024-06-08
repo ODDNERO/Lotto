@@ -135,10 +135,8 @@ extension LottoResultsViewController {
         AF.request(url).responseDecodable(of: LottoDTO.self) { dataResponse in
             switch dataResponse.result {
             case .success(_):
-                print("--- success ---")
                 self.getLatestRound(startRound: round + 1, completion: completion)
             case .failure(_):
-                print("--- failure ---")
                 completion(round - 1)
             }
         }
@@ -254,16 +252,12 @@ extension LottoResultsViewController {
         roundSearchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         
         lottoNumberLabels.forEach {
-            $0.text = "21" //임시 번호
-            $0.backgroundColor = .no11To20 //임시 색상
             $0.textColor = .white
+            plusLabel.textColor = .black
             $0.textAlignment = .center
             $0.font = .systemFont(ofSize: 17, weight: .semibold)
             $0.layer.cornerRadius = 21
             $0.layer.masksToBounds = true
-            plusLabel.textColor = .black
-            plusLabel.text = "+"
-            plusLabel.backgroundColor = .clear
         }
     }
     
