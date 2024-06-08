@@ -10,10 +10,17 @@ import Alamofire
 import SnapKit
 
 class LottoResultsViewController: UIViewController {
-    
+    let showKeyboardButton = UIButton()
     let roundTextField = UITextField()
-    let roundPickerView = UIPickerView()
+    let roundSearchButton = UIButton()
+    let searchStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        return stackView
+    }()
     
+    let roundPickerView = UIPickerView()
     let lottoDateLabel = UILabel()
     
     let lottoRoundLabel = UILabel()
@@ -90,6 +97,8 @@ class LottoResultsViewController: UIViewController {
 //MARK: - Configure
 extension LottoResultsViewController {
     func configureHierarchy() {
+        [showKeyboardButton, roundTextField, roundSearchButton].forEach { searchStackView.addArrangedSubview($0) }
+        
         [lottoRoundLabel, resultLabel].forEach { resultStackView.addArrangedSubview($0) }
         
         lottoNumbers.forEach { lottoNumberStackView.addArrangedSubview($0) }
@@ -98,12 +107,17 @@ extension LottoResultsViewController {
         
         [firstWinnerCountTitleLabel, firstWinnerCountLabel].forEach { winnerCountStackView.addArrangedSubview($0) }
         
-        [roundTextField, roundPickerView, lottoDateLabel, resultStackView, lottoNumberStackView, prizeMoneyStackView, winnerCountStackView].forEach { view.addSubview($0) }
+        [searchStackView, lottoDateLabel, resultStackView, lottoNumberStackView, prizeMoneyStackView, winnerCountStackView].forEach { view.addSubview($0) }
     }
     
     func configureData() {
+        roundTextField.delegate = self
+        roundTextField.inputView = roundPickerView
+        
         roundPickerView.delegate = self
         roundPickerView.dataSource = self
+        
+        roundTextField.placeholder = "회차 입력하기"
     }
     
     //MARK: - Network
@@ -146,30 +160,67 @@ extension LottoResultsViewController: UIPickerViewDelegate, UIPickerViewDataSour
 //MARK: - Configure UI
 extension LottoResultsViewController {
     func configureLayout() {
+        searchStackView.snp.makeConstraints {
+            $0.centerX.equalTo(view)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(50)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(50)
+            $0.height.equalTo(40)
+
+            showKeyboardButton.snp.makeConstraints {
+                $0.leading.equalTo(searchStackView)
+                $0.width.equalTo(40)
+            }
+            roundTextField.snp.makeConstraints {
+                $0.centerX.equalTo(searchStackView)
+            }
+            roundSearchButton.snp.makeConstraints {
+                $0.trailing.equalTo(searchStackView)
+                $0.width.equalTo(40)
+            }
+        }
+
         lottoNumberStackView.snp.makeConstraints {
             $0.centerX.equalTo(view)
             $0.centerY.equalTo(view) //임시
-        }
-        lottoNumbers.forEach {
-            $0.snp.makeConstraints { $0.size.equalTo(42) }
+            
+            lottoNumbers.forEach {
+                $0.snp.makeConstraints { $0.size.equalTo(42) }
+            }
         }
     }
     
     func configureUI() {
         view.backgroundColor = .white
-
+        
+        [showKeyboardButton, roundTextField, roundSearchButton].forEach {
+            $0.layer.cornerRadius = 10
+            $0.layer.borderWidth = 1.5
+            $0.backgroundColor = .white
+            roundSearchButton.backgroundColor = .main
+            $0.layer.borderColor = UIColor(resource: .main).cgColor
+            showKeyboardButton.layer.borderColor = UIColor.systemGray4.cgColor
+        }
+        roundTextField.tintColor = .clear
+        roundTextField.textColor = .black
+        roundTextField.textAlignment = .center
+        roundTextField.font = .systemFont(ofSize: 15, weight: .semibold)
+        showKeyboardButton.tintColor = .systemGray
+        roundSearchButton.tintColor = .white
+        showKeyboardButton.setImage(UIImage(systemName: "keyboard.fill"), for: .normal)
+        roundSearchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        
         lottoNumbers.forEach {
             $0.text = "21" //임시 번호
-            $0.backgroundColor = .red //임시 색상
+            $0.backgroundColor = .no11To20 //임시 색상
             $0.textColor = .white
             $0.textAlignment = .center
             $0.font = .systemFont(ofSize: 17, weight: .semibold)
             $0.layer.cornerRadius = 21
             $0.layer.masksToBounds = true
+            plusLabel.textColor = .black
+            plusLabel.text = "+"
+            plusLabel.backgroundColor = .clear
         }
-        plusLabel.textColor = .black
-        plusLabel.text = "+"
-        plusLabel.backgroundColor = .clear
     }
     
     func setLottoNumberColor(_ lottoNum: Int) -> UIColor {
