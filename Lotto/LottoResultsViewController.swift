@@ -73,23 +73,22 @@ class LottoResultsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        configureHierarchy()
+        configureData()
+        configureLayout()
+        configureUI()
         
-        getLatestRound(startRound: 1115) {
-            print("completionRound:", $0)
+        settingNavigation()
+        
+        getLatestRound(startRound: 1115) { latestRound in
+            self.latestRound = latestRound
             
-            self.latestRound = $0
-            print("latestRound:", self.latestRound)
-            
-            for round in (1...$0).reversed() {
+            for round in (1...latestRound).reversed() {
                 self.roundList.append(round)
             }
             
-            self.configureHierarchy()
-            self.configureData()
-            self.configureLayout()
-            self.configureUI()
-            
-            self.settingNavigation()
+            self.requestLottoData(round: latestRound)
         }
     }
 }
