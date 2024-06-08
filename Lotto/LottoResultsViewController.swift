@@ -112,14 +112,21 @@ extension LottoResultsViewController {
     
     func configureData() {
         roundTextField.delegate = self
+        roundTextField.placeholder = "회차 입력하기"
         roundTextField.inputView = roundPickerView
+        roundTextField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(textFieldTapped(_:))))
+        
+        roundSearchButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
         
         roundPickerView.delegate = self
         roundPickerView.dataSource = self
-        
-        roundTextField.placeholder = "회차 입력하기"
     }
     
+    @objc func textFieldTapped(_ sender: UITapGestureRecognizer) {
+        roundTextField.text = nil
+        roundTextField.becomeFirstResponder()
+    }
+
     //MARK: - Network
     func getLatestRound(startRound round: Int, completion: @escaping (Int) -> Void) {
         print("round:", round)
