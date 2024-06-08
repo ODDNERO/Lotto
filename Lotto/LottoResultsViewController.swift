@@ -137,8 +137,22 @@ extension LottoResultsViewController {
             }
         }
     }
-
-    func setLottoResult(_ numbers: [Int], _ date: String, _ round: Int, _ money: Int, _ winner: Int) {
+    
+    func requestLottoData(round: Int) {
+        let url = APIURL.lottoURL + String(round)
+        
+        AF.request(url).responseDecodable(of: LottoDTO.self) { dataResponse in
+            switch dataResponse.result {
+            case .success(let lotto):
+                let lottoNumbers = [lotto.drwtNo1, lotto.drwtNo2, lotto.drwtNo3, lotto.drwtNo4, lotto.drwtNo5, lotto.drwtNo6, 0, lotto.bnusNo]
+                self.setLottoData(lottoNumbers, lotto.drwNoDate, lotto.drwNo, lotto.firstWinamnt, lotto.firstPrzwnerCo)
+            case .failure(_):
+                self.roundTextField.text = "💬 다시 입력하기"
+            }
+        }
+    }
+    
+    func setLottoData(_ numbers: [Int], _ date: String, _ round: Int, _ money: Int, _ winner: Int) {
         for (index, label) in lottoNumberLabels.enumerated() {
             label.text = "\(numbers[index])"
             label.backgroundColor = setLottoNumberColor(numbers[index])
