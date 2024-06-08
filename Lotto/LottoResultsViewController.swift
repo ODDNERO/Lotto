@@ -32,7 +32,7 @@ class LottoResultsViewController: UIViewController {
         return stackView
     }()
     
-    lazy var lottoNumbers = [lottoNo1Label, lottoNo2Label, lottoNo3Label, lottoNo4Label, lottoNo5Label, lottoNo6Label, plusLabel, lottoBonusLabel]
+    lazy var lottoNumberLabels = [lottoNo1Label, lottoNo2Label, lottoNo3Label, lottoNo4Label, lottoNo5Label, lottoNo6Label, plusLabel, lottoBonusLabel]
     let lottoNo1Label = UILabel()
     let lottoNo2Label = UILabel()
     let lottoNo3Label = UILabel()
@@ -101,7 +101,7 @@ extension LottoResultsViewController {
         
         [lottoRoundLabel, resultLabel].forEach { resultStackView.addArrangedSubview($0) }
         
-        lottoNumbers.forEach { lottoNumberStackView.addArrangedSubview($0) }
+        lottoNumberLabels.forEach { lottoNumberStackView.addArrangedSubview($0) }
         
         [firstPrizeMoneyTitleLabel, firstPrizeMoneyLabel].forEach { prizeMoneyStackView.addArrangedSubview($0) }
         
@@ -183,7 +183,7 @@ extension LottoResultsViewController {
             $0.centerX.equalTo(view)
             $0.centerY.equalTo(view) //임시
             
-            lottoNumbers.forEach {
+            lottoNumberLabels.forEach {
                 $0.snp.makeConstraints { $0.size.equalTo(42) }
             }
         }
@@ -209,7 +209,7 @@ extension LottoResultsViewController {
         showKeyboardButton.setImage(UIImage(systemName: "keyboard.fill"), for: .normal)
         roundSearchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         
-        lottoNumbers.forEach {
+        lottoNumberLabels.forEach {
             $0.text = "21" //임시 번호
             $0.backgroundColor = .no11To20 //임시 색상
             $0.textColor = .white
