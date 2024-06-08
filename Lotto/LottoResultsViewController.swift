@@ -138,6 +138,18 @@ extension LottoResultsViewController {
         }
     }
     
+    @objc func searchButtonClicked() {
+        guard let input = roundTextField.text, !input.isEmpty else {
+            roundTextField.text = "⛔️ 회차 입력하기"
+            return
+        }
+        
+        let isInputInt = Int(input) != nil
+        guard isInputInt else { roundTextField.text = "⛔️ 숫자 입력하기" ; return }
+        
+        requestLottoData(round: Int(input)!)
+    }
+    
     func requestLottoData(round: Int) {
         let url = APIURL.lottoURL + String(round)
         
