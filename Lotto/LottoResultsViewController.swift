@@ -129,8 +129,44 @@ extension LottoResultsViewController {
         roundTextField.text = nil
         roundTextField.becomeFirstResponder()
     }
+    
+    @objc func searchButtonClicked() {
+        guard let input = roundTextField.text, !input.isEmpty else {
+            roundTextField.text = "⛔️ 회차 입력하기"
+            return
+        }
+        
+        let isInputInt = Int(input) != nil
+        guard isInputInt else { roundTextField.text = "⛔️ 숫자 입력하기" ; return }
+        
+        requestLottoData(round: Int(input)!)
+    }
+}
 
-    //MARK: - Network
+extension LottoResultsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return latestRound
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return String(roundList[row])
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        roundTextField.text = String(roundList[row])
+    }
+}
+
+extension LottoResultsViewController: UITextFieldDelegate {
+    // 키보드 버튼 클릭 시 PickerView 대신 키보드 NumberPad 띄우기
+}
+
+//MARK: - Network
+extension LottoResultsViewController {
     func getLatestRound(startRound round: Int, completion: @escaping (Int) -> Void) {
         print("round:", round)
         
@@ -144,18 +180,6 @@ extension LottoResultsViewController {
                 completion(round - 1)
             }
         }
-    }
-    
-    @objc func searchButtonClicked() {
-        guard let input = roundTextField.text, !input.isEmpty else {
-            roundTextField.text = "⛔️ 회차 입력하기"
-            return
-        }
-        
-        let isInputInt = Int(input) != nil
-        guard isInputInt else { roundTextField.text = "⛔️ 숫자 입력하기" ; return }
-        
-        requestLottoData(round: Int(input)!)
     }
     
     func requestLottoData(round: Int) {
@@ -182,24 +206,6 @@ extension LottoResultsViewController {
         lottoRoundLabel.text = "\(round)회"
         firstPrizeMoneyLabel.text = " \(money)원 "
         firstWinnerCountLabel.text = "\(winner)"
-    }
-}
-
-extension LottoResultsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return latestRound
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return String(roundList[row])
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        roundTextField.text = String(roundList[row])
     }
 }
 
@@ -315,10 +321,6 @@ extension LottoResultsViewController {
         default:
             return .clear
         }
-    }
-    
-    func assignLottoNumbersToLabels() {
-        
     }
 }
 
