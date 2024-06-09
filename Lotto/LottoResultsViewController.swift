@@ -28,7 +28,7 @@ class LottoResultsViewController: UIViewController {
     let resultStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        //추가 설정 필요
+        stackView.spacing = 10
         return stackView
     }()
     
@@ -54,8 +54,8 @@ class LottoResultsViewController: UIViewController {
     let firstPrizeMoneyLabel = UILabel()
     let prizeMoneyStackView = {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
-        //추가 설정 필요
+        stackView.axis = .vertical
+        stackView.spacing = 7
         return stackView
     }()
     
@@ -63,8 +63,8 @@ class LottoResultsViewController: UIViewController {
     let firstWinnerCountLabel = UILabel()
     let winnerCountStackView = {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
-        //추가 설정 필요
+        stackView.axis = .vertical
+        stackView.spacing = 7
         return stackView
     }()
     
@@ -202,32 +202,44 @@ extension LottoResultsViewController: UIPickerViewDelegate, UIPickerViewDataSour
 //MARK: - Configure UI
 extension LottoResultsViewController {
     func configureLayout() {
+        [searchStackView, roundTextField, resultStackView, lottoNumberStackView, prizeMoneyStackView, winnerCountStackView].forEach {
+            $0.snp.makeConstraints { $0.centerX.equalTo(view) }
+        }
+        
         searchStackView.snp.makeConstraints {
-            $0.centerX.equalTo(view)
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(50)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(25)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(50)
-            $0.height.equalTo(40)
 
             showKeyboardButton.snp.makeConstraints {
                 $0.leading.equalTo(searchStackView)
-                $0.width.equalTo(40)
-            }
-            roundTextField.snp.makeConstraints {
-                $0.centerX.equalTo(searchStackView)
+                $0.size.equalTo(40)
             }
             roundSearchButton.snp.makeConstraints {
                 $0.trailing.equalTo(searchStackView)
-                $0.width.equalTo(40)
             }
         }
-
+        
+        resultStackView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(120)
+        }
+        
         lottoNumberStackView.snp.makeConstraints {
-            $0.centerX.equalTo(view)
-            $0.centerY.equalTo(view) //임시
-            
+            $0.top.equalTo(resultStackView.snp.bottom).offset(50)
             lottoNumberLabels.forEach {
                 $0.snp.makeConstraints { $0.size.equalTo(42) }
             }
+        }
+        
+        lottoDateLabel.snp.makeConstraints {
+            $0.top.equalTo(lottoNumberStackView.snp.bottom).offset(40)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
+        }
+        
+        prizeMoneyStackView.snp.makeConstraints {
+            $0.top.equalTo(lottoDateLabel.snp.bottom).offset(55)
+        }
+        winnerCountStackView.snp.makeConstraints {
+            $0.top.equalTo(prizeMoneyStackView.snp.bottom).offset(55)
         }
     }
     
