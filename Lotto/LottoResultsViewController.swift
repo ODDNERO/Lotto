@@ -119,6 +119,10 @@ extension LottoResultsViewController {
         
         roundPickerView.delegate = self
         roundPickerView.dataSource = self
+
+        resultLabel.text = "추첨 결과"
+        firstPrizeMoneyTitleLabel.text = "💰 1등 당첨금 💰"
+        firstWinnerCountTitleLabel.text = "🤑 1등 당첨 게임 수 🤑"
     }
     
     @objc func textFieldTapped(_ sender: UITapGestureRecognizer) {
@@ -174,10 +178,10 @@ extension LottoResultsViewController {
             label.backgroundColor = setLottoNumberColor(numbers[index])
         }
         plusLabel.text = "+"
-        lottoDateLabel.text = "\(date) 추첨"
+        lottoDateLabel.text = "\(date)"
         lottoRoundLabel.text = "\(round)회"
-        firstPrizeMoneyLabel.text = "\(money)원"
-        firstWinnerCountLabel.text = "\(winner)명"
+        firstPrizeMoneyLabel.text = " \(money)원 "
+        firstWinnerCountLabel.text = "\(winner)"
     }
 }
 
