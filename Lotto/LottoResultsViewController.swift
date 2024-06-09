@@ -263,6 +263,11 @@ extension LottoResultsViewController {
         showKeyboardButton.setImage(UIImage(systemName: "keyboard.fill"), for: .normal)
         roundSearchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         
+        lottoRoundLabel.textColor = .systemYellow
+        resultLabel.textColor = .black
+        lottoRoundLabel.font = .systemFont(ofSize: 25, weight: .heavy)
+        resultLabel.font = .systemFont(ofSize: 24, weight: .semibold)
+        
         lottoNumberLabels.forEach {
             $0.textColor = .white
             plusLabel.textColor = .black
@@ -271,6 +276,24 @@ extension LottoResultsViewController {
             $0.layer.cornerRadius = 21
             $0.layer.masksToBounds = true
         }
+        
+        lottoDateLabel.font = .systemFont(ofSize: 13, weight: .semibold)
+        lottoDateLabel.textColor = .systemGray
+        
+        [firstPrizeMoneyTitleLabel, firstWinnerCountTitleLabel].forEach {
+            $0.font = .systemFont(ofSize: 22, weight: .semibold)
+            $0.textAlignment = .center
+            $0.textColor = .main
+        }
+        
+        [firstPrizeMoneyLabel, firstWinnerCountLabel].forEach {
+            $0.font = .systemFont(ofSize: 25, weight: .bold)
+            $0.textAlignment = .center
+        }
+        
+        firstPrizeMoneyLabel.backgroundColor = .black
+        firstPrizeMoneyLabel.textColor = .green
+        firstWinnerCountLabel.textColor = .blue
     }
     
     func setLottoNumberColor(_ lottoNum: Int) -> UIColor {
